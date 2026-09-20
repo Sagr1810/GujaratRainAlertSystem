@@ -40,8 +40,13 @@ const allowedOrigins = [
 ];
 app.use(cors({
   origin: (origin, cb) => {
-    // allow non-browser requests (curl, Render health checks) and listed origins
-    if (!origin || allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+    // allow no-origin requests (Render health checks, curl) + localhost + vercel + onrender
+    if (
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      /\.vercel\.app$/.test(origin) ||
+      /\.onrender\.com$/.test(origin)
+    ) {
       cb(null, true);
     } else {
       cb(new Error(`CORS: ${origin} not allowed`));
