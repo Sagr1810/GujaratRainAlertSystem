@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: gujarat-rain-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node src/server.js
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        value: https://gujarat-rain-alert.vercel.app   # update after Vercel deploy
+      - key: JWT_SECRET
+        generateValue: true
+      # Optional — leave blank to run in demo mode (no DB needed)
+      - key: DB_HOST
+        value: ""
+      - key: DB_PASSWORD
+        value: ""
+      # Optional — IBM Granite AI (leave blank to use rule-based fallback)
+      - key: IBM_WATSON_API_KEY
+        value: ""
+      - key: IBM_WATSON_PROJECT_ID
+        value: ""
+      - key: IBM_GRANITE_MODEL_ID
+        value: ibm/granite-13b-instruct-v2
